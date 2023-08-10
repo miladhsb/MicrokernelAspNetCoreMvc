@@ -1,0 +1,48 @@
+﻿@using MicrokernelAspNetCoreMvc.Infrastructure.Plugins;
+@model IEnumerable<PluginInfo>
+@{
+}
+
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">FriendlyName</th>
+            <th scope="col">SystemName</th>
+            <th scope="col">Group</th>
+            <th scope="col">Author</th>
+            <th scope="col">Version</th>
+            <th scope="col">is Installed</th>
+            <th scope="col">Action</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            var PluginInfos = Model.ToList();
+            foreach (var item in PluginInfos)
+            {
+                <tr>
+                    <th scope="row">@(PluginInfos.IndexOf(item)+1)</th>
+                    <td>@item.FriendlyName</td>
+                    <td>@item.SystemName</td>
+                    <td>@item.Group</td>
+                    <td>@item.Author</td>
+                    <td>@item.Installed</td>
+                    <td>@item.Version</td>
+                    <td>
+                        
+                        <a class="btn btn-primary" asp-controller="Home" asp-action="PluginsInstall" asp-route-SystemName="@item.SystemName" role="button">Install</a>
+                        <a class="btn btn-danger" asp-controller="Home" asp-action="PluginsUnistall" asp-route-SystemName="@item.SystemName" role="button">Unistall</a>
+                        <a class="btn btn-success" asp-controller="Home" asp-action="ConfigurePlugin" asp-route-SystemName="@item.SystemName" role="button">Configure</a>
+                        </td>
+                  
+                   
+                </tr>
+            }
+        }
+       
+      
+    </tbody>
+</table>
